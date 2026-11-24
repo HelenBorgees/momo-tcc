@@ -10,8 +10,8 @@ O MOMO é um **protótipo acadêmico em desenvolvimento**. O projeto investiga s
 | --- | --- |
 | [aquisicao/](aquisicao/) | Sketches Arduino de caracterização e resposta temporal, registros CSV, gráficos SVG e anotações ambientais. |
 | [algoritmos/](algoritmos/) | Código Python da investigação por MMQ e da avaliação de Random Forest + 1-NN com DTW. |
-| [firmware/](firmware/) | Estado da entrega do firmware de operação e do processamento embarcado. |
-| [aplicativo/momo/](aplicativo/momo/) | Projeto Android nativo em Kotlin e Jetpack Compose, com configuração Gradle e testes do aplicativo. |
+| [firmware/](firmware/) | Firmware XIAO ESP32-C6, inferência, modelo exportado e ferramentas de replay. |
+| [aplicativo/momo/](aplicativo/momo/) | Projeto Android nativo em Kotlin e Jetpack Compose, com configuração Gradle e testes. As regras Firebase estão em [aplicativo/firebase/](aplicativo/firebase/). |
 | [docs/](docs/) | Seleção de arquivos, verificações e publicação no GitHub. |
 
 ## Aquisição experimental
@@ -24,18 +24,18 @@ Os 18 CSVs fornecidos incluem três ensaios temporais e três ensaios na série 
 
 - **MMQ.** Usa os nove ensaios temporais. Calcula a diferença entre capacitância média após a aplicação e a linha de base seca, a tendência linear e o intervalo interquartil após a aplicação. Padroniza as características com os dados de treino de cada rodada e ajusta por mínimos quadrados. A avaliação é leave-one-out por ensaio.
 - **Random Forest + 1-NN com DTW.** Usa 15 ensaios com um marcador de aplicação. A Random Forest binária usa desvio em relação à referência seca e diferenças de primeira e segunda ordem. O segmento começa na primeira previsão positiva após a calibração de 30 s. O 1-NN compara o prefixo desse segmento com segmentos de referência dos ensaios de treino pela distância DTW.
-- **Diferença em relação ao protocolo descrito.** O código recebido seleciona o comprimento do prefixo no treino interno de cada rodada, equilibrando acurácia balanceada e antecipação. A descrição do método final estabelece 21 leituras fixas. O script desta entrega reproduz a variante de avaliação fornecida, com o comprimento selecionado registrado em `k_train`.
+- **Diferença em relação ao protocolo descrito.** O código recebido seleciona o comprimento do prefixo no treino interno de cada rodada, equilibrando acurácia balanceada e antecipação. A descrição do método final estabelece 21 leituras fixas. O script registra o comprimento escolhido em `k_train`. O modelo embarcado fornecido usa um prefixo fixo de 21 leituras e 15 assinaturas.
 
 Amostras do mesmo ensaio ficam juntas nas divisões de treino e teste. O MMQ usa a marca real de aplicação para calcular suas características e utiliza o trecho posterior completo. A avaliação de RF + DTW usa essa marca para gerar os rótulos de treino e verificar se o alerta saiu antes da aplicação. Veja os comandos de reprodução e os limites de interpretação. [Instruções das análises](algoritmos/README.md)
 
 ## Firmware e aplicativo
 
-Os dois sketches fornecidos implementam aquisição experimental por serial. O firmware de operação que executaria o classificador no XIAO ESP32-C6 e publicaria a telemetria, assim como modelos treinados e exportações embarcadas, está pendente de fornecimento. [Estado do firmware](firmware/README.md)
+Os dois sketches fornecidos implementam aquisição experimental por serial. O firmware integrado lê o FDC1004, executa a inferência no XIAO ESP32-C6 e publica o estado no Firebase. O modelo fornecido contém 100 árvores e 15 assinaturas dos ensaios. [Configuração do firmware](firmware/README.md)
 
-O MOMO contém um modo de demonstração com dados simulados e um modo conectado. No modo conectado, usa Firebase Authentication com login Google e Firebase Realtime Database para telemetria, vínculos e histórico. O provisionamento inicial usa HTTP local pelo ponto de acesso temporário do dispositivo. A reprodução integrada depende de firmware compatível e da configuração de um projeto Firebase próprio. [Instruções do aplicativo](aplicativo/momo/README.md)
+O MOMO contém um modo de demonstração com dados simulados e um modo conectado. No modo conectado, usa Firebase Authentication com login Google e Firebase Realtime Database para telemetria, vínculos e histórico. O provisionamento inicial usa HTTP local pelo ponto de acesso temporário do dispositivo. A reprodução integrada exige configurar o firmware e um projeto Firebase próprio. [Instruções do aplicativo](aplicativo/momo/README.md)
 
 ## Limitações
 
-O conjunto contém poucas repetições por classe e as avaliações usam apenas os registros fornecidos. A base de RF + DTW mistura ensaios temporais e ensaios de umidade de fezes e diarreia, enquanto a classe urina entra apenas com a série temporal. Isso limita a interpretação da comparação entre classes e a generalização para outros protocolos ou condições de medição. O repositório permite identificar e reproduzir a variante fornecida, mas a equivalência com o protocolo de 21 leituras e a operação integrada do protótipo dependem dos artefatos finais da pesquisa.
+O conjunto contém poucas repetições por classe e as avaliações usam apenas os registros fornecidos. A base de RF + DTW mistura ensaios temporais e ensaios de umidade de fezes e diarreia, enquanto a classe urina entra apenas com a série temporal. Isso limita a interpretação da comparação entre classes e a generalização para outros protocolos ou condições de medição. O repositório permite identificar e reproduzir a variante fornecida, mas a operação integrada do protótipo ainda requer teste em placa e no aplicativo.
 
 [Inventário e verificação](docs/inventario.md) · [Publicação no GitHub](docs/publicacao.md)

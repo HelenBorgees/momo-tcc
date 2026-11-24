@@ -1,0 +1,28 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "deviceLinks": {
+      "$ownerUid": {
+        ".read": "auth != null && auth.uid == $ownerUid",
+        ".write": "auth != null && auth.uid == $ownerUid && newData.hasChildren(['deviceUid']) && newData.child('deviceUid').isString()"
+      }
+    },
+    "deviceStatus": {
+      "$ownerUid": {
+        ".read": "auth != null && auth.uid == $ownerUid",
+        ".write": "auth != null && auth.uid == root.child('deviceLinks').child($ownerUid).child('deviceUid').val()"
+      }
+    },
+    "deviceCommands": {
+      "$ownerUid": {
+        ".read": "auth != null && auth.uid == root.child('deviceLinks').child($ownerUid).child('deviceUid').val()",
+        ".write": "auth != null && auth.uid == $ownerUid"
+      }
+    }
+  }
+}

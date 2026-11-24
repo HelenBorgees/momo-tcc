@@ -36,3 +36,11 @@ google-services*.json
 # Temporarios do sistema
 .DS_Store
 Thumbs.db
+
+# Configuração local e saídas do firmware
+/firmware/momo_embarcado/momo_config.h
+/firmware/momo_embarcado/teste_replay
+/firmware/momo_embarcado/teste_replay.exe
+*.bak
+*.log
+/teste_replay.exe

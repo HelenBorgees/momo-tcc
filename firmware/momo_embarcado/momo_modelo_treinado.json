@@ -1,0 +1,31 @@
+{
+  "arvores": 100,
+  "nos": 10826,
+  "k": 21,
+  "hm_interno": 0.9668446474034058,
+  "templates": 15,
+  "calibracao_ms": 30000,
+  "classes": [
+    "diarreia",
+    "fezes",
+    "urina"
+  ],
+  "ensaios": [
+    "diarreia1-t.csv",
+    "diarreia2-t.csv",
+    "diarreia3-t.csv",
+    "fezes1-t.csv",
+    "fezes2-t.csv",
+    "fezes3-t.csv",
+    "diarreia1-u.csv",
+    "diarreia2-u.csv",
+    "diarreia3-u.csv",
+    "fezes1-u.csv",
+    "fezes2-u.csv",
+    "fezes3-u.csv",
+    "urina1-t.csv",
+    "urina2-t.csv",
+    "urina3-t.csv"
+  ],
+  "nota": "Treinado com 15 registros completos de aplicacao unica. A validacao aninhada 13/15 NAO representa teste externo do modelo final ajustado sobre todos os registros."
+}

@@ -2,3 +2,6 @@
 /aquisicao/dados/** -text
 /aquisicao/sketches/**/*.ino -text
 /algoritmos/**/*.py -text
+
+/firmware/momo_embarcado/** -text
+/aplicativo/firebase/*.json -text

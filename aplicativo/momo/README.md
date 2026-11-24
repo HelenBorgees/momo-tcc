@@ -15,12 +15,12 @@ Projeto Android nativo em Kotlin e Jetpack Compose. O módulo `app` inclui inter
    gradle :app:connectedDebugAndroidTest
    ```
 
-5. Na tela inicial, use **Acessar Modo Demonstração (Sem Login)** para dados simulados. A integração real exige login Google, regras do Realtime Database compatíveis e firmware de operação. Para release, a configuração mantida lê `KEYSTORE_PATH`, `STORE_PASSWORD` e `KEY_PASSWORD` do ambiente e usa o alias `upload`.
+5. Na tela inicial, use **Acessar Modo Demonstração (Sem Login)** para dados simulados. A integração real exige login Google e configuração do [firmware](../../firmware/) e das [regras do Realtime Database](../firebase/firebase_realtime_rules_prototipo.json) em um projeto de teste. Para release, a configuração mantida lê `KEYSTORE_PATH`, `STORE_PASSWORD` e `KEY_PASSWORD` do ambiente e usa o alias `upload`.
 
 ## Integração do protótipo
 
 - **Configuração local.** O celular se conecta ao SoftAP temporário do dispositivo e envia `POST /wifi-setup` a `192.168.4.1` com SSID, senha da rede escolhida, identificador e UID do proprietário. Esse endereço de configuração usa HTTP local, conforme o manifesto e a política de rede.
 - **Operação remota.** O cliente observa `deviceLinks/{uid}`, `deviceStatus/{uid}` e os registros `users/{uid}/sensorEvents` e `users/{uid}/confirmedChanges`. Publica comandos em `deviceCommands/{uid}` e acompanha o identificador de confirmação. O perfil fica em `users/{uid}/babyProfile`.
-- **Escopo da reprodução.** As regras originais do Realtime Database e a implementação embarcada desses contratos não vieram no anexo. A demonstração usa dados simulados. Para o teste conectado, use dados fictícios e regras de acesso vinculadas à identidade autenticada.
+- **Escopo da reprodução.** O firmware fornecido publica o status atual e responde a comandos. A integração de ponta a ponta com este Android 1.14 ainda precisa ser testada, inclusive o histórico de eventos. A demonstração usa dados simulados. Para o teste conectado, use dados fictícios e regras de acesso vinculadas à identidade autenticada.
 
 O `.env.example` é um modelo local para o plugin de configuração. O código recebido mantém a dependência Firebase AI no Gradle, sem chamada no código-fonte analisado. Os JSONs Firebase originais, as chaves de assinatura e os identificadores do projeto de exportação ficaram fora do pacote.

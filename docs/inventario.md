@@ -25,6 +25,10 @@
 - Simulação do primeiro git add com conversão de fim de linha habilitada. Os atributos preservam os bytes dos anexos. As regras de exclusão cobrem a configuração Firebase, o arquivo de ambiente e os keystores, e o modelo de ambiente entra no índice.
 - Conferência dos links locais e da integridade do ZIP final.
 
-## Artefatos pendentes
+## Complemento MOMO_INTEGRADO.zip
 
-Para reproduzir exatamente a configuração descrita no TCC e testar a operação integrada, faltam a implementação ou protocolo de avaliação efetivamente usado com prefixo fixo de 21 leituras, o firmware de operação, as assinaturas e modelos exportados caso tenham sido produzidos, e as regras do Realtime Database empregadas no protótipo. As notas ambientais são as únicas anotações de bancada que acompanham os CSVs. Volumes, composição e procedimentos de captura/exportação devem ser conferidos no texto do TCC ou nos cadernos de laboratório.
+Foram incluídos o firmware integrado, o modelo em C++ e JSON, os scripts de exportação e replay, o teste C++, os certificados públicos de CA e as regras de protótipo do Realtime Database. O modelo e o código C++ foram preservados byte a byte. Nos dois scripts auxiliares, o import passou a usar o nome indicado por `--analise`, de modo a localizar o script Python incluído no repositório.
+
+O anexo contém uma variante Android 1.0. A versão 1.14 já publicada foi mantida por incluir, entre outras diferenças, transporte dedicado ao SoftAP e testes adicionais do protocolo. A compatibilidade com o firmware precisa ser verificada. O ZIP integral, o Android 1.0, os dois JSONs Firebase, o cabeçalho original de configuração, o log, os backups, o prompt do AI Studio e os guias antigos ficaram fora. A configuração do firmware tem um modelo com valores fictícios. O guia atualizado está em [firmware/](../firmware/).
+
+A validação física e a reprodução do treinamento não foram realizadas. Volumes, composição e procedimentos de captura/exportação dos ensaios devem ser conferidos no texto do TCC ou nos cadernos de laboratório.
