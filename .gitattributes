@@ -1,0 +1,4 @@
+# Preserve os bytes dos anexos em qualquer plataforma.
+/aquisicao/dados/** -text
+/aquisicao/sketches/**/*.ino -text
+/algoritmos/**/*.py -text

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MOMO</string>
+    <string name="app_tagline">Monitoramento inteligente de fraldas</string>
+    <string name="sign_in_with_google">Entrar com Google</string>
+    <string name="sign_out">Sair da conta</string>
+    <string name="demo_mode_button">Acessar Modo Demonstração</string>
+    <string name="auth_error_collision">Já existe uma conta associada a este e-mail criada com outro método de acesso. Para sua segurança, a vinculação automática não é permitida. Por favor, utilize o método de login original.</string>
+    <string name="auth_error_cancelled">Operação cancelada pelo usuário.</string>
+    <string name="auth_error_generic">Falha na autenticação com Google. Verifique sua conexão e tente novamente.</string>
+</resources>

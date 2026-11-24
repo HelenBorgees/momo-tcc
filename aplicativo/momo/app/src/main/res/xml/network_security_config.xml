@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Permite HTTP em texto claro exclusivamente para a configuração inicial SoftAP do ESP32-C6 -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">192.168.4.1</domain>
+    </domain-config>
+    <!-- Todo o tráfego restante (inclusive Firebase e Google Auth) permanece estritamente HTTPS -->
+    <base-config cleartextTrafficPermitted="false" />
+</network-security-config>

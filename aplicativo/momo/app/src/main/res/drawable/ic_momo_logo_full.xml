@@ -1,0 +1,108 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="480dp"
+    android:height="130dp"
+    android:viewportWidth="480"
+    android:viewportHeight="130">
+
+    <!-- First M -->
+    <path
+        android:pathData="M15,114 C15,119 19,122 24,122 C29,122 33,119 33,114 L33,70 L53,98 C55,101 60,101 62,98 L82,70 L82,114 C82,119 86,122 91,122 C96,122 100,119 100,114 L100,48 C100,43 95,39 90,40 C86,41 83,43 81,47 L57.5,80 L34,47 C32,43 29,41 25,40 C20,39 15,43 15,48 Z"
+        android:fillColor="#FA8E53" />
+
+    <!-- Peach Character (replacing first O) -->
+    <group
+        android:name="peach_character"
+        android:translateX="110"
+        android:translateY="2"
+        android:scaleX="0.62"
+        android:scaleY="0.62">
+
+        <!-- Stem -->
+        <path
+            android:pathData="M98,48 C95,38 90,30 84,24 C83,23 85,22 86,23 C93,29 99,38 101,47 Z"
+            android:fillColor="#738F2E" />
+
+        <!-- Back/Left Leaf -->
+        <path
+            android:pathData="M96,44 C88,38 78,32 72,28 C70,27 72,25 75,26 C84,28 92,34 98,42 Z"
+            android:fillColor="#85A338" />
+
+        <!-- Main/Right Leaf -->
+        <path
+            android:pathData="M100,44 C106,34 116,22 128,14 C131,12 133,13 131,16 C124,26 116,36 103,46 Z"
+            android:fillColor="#97B745" />
+        <!-- Leaf Vein -->
+        <path
+            android:pathData="M102,43 Q114,30 128,15"
+            android:strokeColor="#7E9B32"
+            android:strokeWidth="1.5"
+            android:strokeLineCap="round" />
+
+        <!-- Peach Body -->
+        <path
+            android:pathData="M100,52 C82,40 54,48 44,72 C34,96 38,124 50,146 C62,168 84,178 100,178 C116,178 138,168 150,146 C162,124 166,96 156,72 C146,48 118,40 100,52 Z"
+            android:fillColor="#FA8E53" />
+
+        <!-- Peach Center Cleft Shading -->
+        <path
+            android:pathData="M100,53 C99.5,65 99.5,78 100,90"
+            android:strokeColor="#ED783E"
+            android:strokeWidth="2.2"
+            android:strokeLineCap="round" />
+
+        <!-- Diaper Body (White/Ivory Base) -->
+        <path
+            android:pathData="M46,104 C44,116 46,134 52,144 C64,166 84,178 100,178 C116,178 136,166 148,144 C154,134 156,116 154,104 C136,108 118,109 100,109 C82,109 64,108 46,104 Z"
+            android:fillColor="#FFFDF8" />
+
+        <!-- Diaper Waistband (Soft Cream/Beige) -->
+        <path
+            android:pathData="M43,97 C62,101 81,103 100,103 C119,103 138,101 157,97 C158,101 157,105 155,108 C137,112 118,114 100,114 C82,114 63,112 45,108 C43,105 42,101 43,97 Z"
+            android:fillColor="#FBE6C2" />
+
+        <!-- Diaper Left Wing / Leg Cuff -->
+        <path
+            android:pathData="M46,104 C48,118 53,132 60,142 C56,138 52,128 50,118 C48,110 47,106 46,104 Z"
+            android:fillColor="#F5D6A5" />
+
+        <!-- Diaper Right Wing / Leg Cuff -->
+        <path
+            android:pathData="M154,104 C152,118 147,132 140,142 C144,138 148,128 150,118 C152,110 153,106 154,104 Z"
+            android:fillColor="#F5D6A5" />
+
+        <!-- Diaper Side Tabs -->
+        <path
+            android:pathData="M42,98 C40,99 39,103 40,106 C42,107 46,107 48,105 L47,99 Z"
+            android:fillColor="#FBE6C2" />
+        <path
+            android:pathData="M158,98 C160,99 161,103 160,106 C158,107 154,107 152,105 L153,99 Z"
+            android:fillColor="#FBE6C2" />
+
+        <!-- Text on Diaper: MO (Row 1) -->
+        <path
+            android:pathData="M88,126 L88,117 C88,116 90,116 90.5,117 L92.5,121.5 L94.5,117 C95,116 97,116 97,117 L97,126 C97,126.5 96.5,127 96,127 C95.5,127 95,126.5 95,126 L95,119.5 L93.2,123.5 C93,124 92,124 91.8,123.5 L90,119.5 L90,126 C90,126.5 89.5,127 89,127 C88.5,127 88,126.5 88,126 Z"
+            android:fillColor="#FA8E53" />
+        <path
+            android:pathData="M107,121.5 C107,118.5 104.5,116 101.5,116 C98.5,116 96,118.5 96,121.5 C96,124.5 98.5,127 101.5,127 C104.5,127 107,124.5 107,121.5 Z M104.8,121.5 C104.8,123.3 103.3,124.8 101.5,124.8 C99.7,124.8 98.2,123.3 98.2,121.5 C98.2,119.7 99.7,118.2 101.5,118.2 C103.3,118.2 104.8,119.7 104.8,121.5 Z"
+            android:fillColor="#FA8E53" />
+
+        <!-- Text on Diaper: MO (Row 2) -->
+        <path
+            android:pathData="M88,139 L88,130 C88,129 90,129 90.5,130 L92.5,134.5 L94.5,130 C95,129 97,129 97,130 L97,139 C97,139.5 96.5,140 96,140 C95.5,140 95,139.5 95,139 L95,132.5 L93.2,136.5 C93,137 92,137 91.8,136.5 L90,132.5 L90,139 C90,139.5 89.5,140 89,140 C88.5,140 88,139.5 88,139 Z"
+            android:fillColor="#FA8E53" />
+        <path
+            android:pathData="M107,134.5 C107,131.5 104.5,129 101.5,129 C98.5,129 96,131.5 96,134.5 C96,137.5 98.5,140 101.5,140 C104.5,140 107,137.5 107,134.5 Z M104.8,134.5 C104.8,136.3 103.3,137.8 101.5,137.8 C99.7,137.8 98.2,136.3 98.2,134.5 C98.2,132.7 99.7,131.2 101.5,131.2 C103.3,131.2 104.8,132.7 104.8,134.5 Z"
+            android:fillColor="#FA8E53" />
+    </group>
+
+    <!-- Second M -->
+    <path
+        android:pathData="M245,114 C245,119 249,122 254,122 C259,122 263,119 263,114 L263,70 L283,98 C285,101 290,101 292,98 L312,70 L312,114 C312,119 316,122 321,122 C326,122 330,119 330,114 L330,48 C330,43 325,39 320,40 C316,41 313,43 311,47 L287.5,80 L264,47 C262,43 259,41 255,40 C250,39 245,43 245,48 Z"
+        android:fillColor="#FA8E53" />
+
+    <!-- Second O -->
+    <path
+        android:pathData="M395,42 C368,42 348,62 348,82 C348,102 368,122 395,122 C422,122 442,102 442,82 C442,62 422,42 395,42 Z M395,60 C410,60 422,70 422,82 C422,94 410,104 395,104 C380,104 368,94 368,82 C368,70 380,60 395,60 Z"
+        android:fillColor="#FA8E53" />
+
+</vector>

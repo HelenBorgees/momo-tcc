@@ -1,0 +1,38 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Android e Arduino
+.gradle/
+.kotlin/
+.idea/
+*.iml
+local.properties
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.elf
+*.hex
+*.bin
+
+# Configuracoes locais e assinatura
+.env
+.env.*
+!.env.example
+google-services*.json
+*.jks
+*.keystore
+*.pem
+*.p12
+*.pfx
+*service-account*.json
+
+# Temporarios do sistema
+.DS_Store
+Thumbs.db
