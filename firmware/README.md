@@ -9,7 +9,7 @@ O [sketch integrado](momo_embarcado/momo_embarcado.ino) reúne a leitura do FDC1
 3. Em um projeto Firebase de teste, configure autenticação por e-mail e senha para o dispositivo e login Google para o aplicativo. Revise as [regras fornecidas](../aplicativo/firebase/firebase_realtime_rules_prototipo.json) antes de aplicá-las. O vínculo relaciona o UID do cuidador ao UID técnico. As regras do protótipo foram fornecidas para demonstração acadêmica e não verificam a posse física do dispositivo.
 4. Compile, grave e abra o Monitor Serial a 115200 baud. No telefone, conecte-se ao SoftAP temporário, envie pelo MOMO a configuração da rede Wi-Fi de 2,4 GHz e volte à internet para verificar o estado do dispositivo. Comece a calibração com a fralda seca. O ESP publica em `deviceStatus/{uid}` e consulta `deviceCommands/{uid}`.
 
-O firmware publica estado, identificação e classificação no nó de status. O Android 1.14 também acompanha `users/{uid}/sensorEvents`. O sketch fornecido não publica nesse nó. O funcionamento do pareamento, das confirmações e do histórico com a combinação publicada ainda precisa de teste de bancada.
+O firmware publica o estado, a identificação e a classificação no nó de status. As confirmações de troca são registradas pelo aplicativo. O cliente Android também acompanha a coleção `users/{uid}/sensorEvents`, distinta da telemetria de estado publicada por este sketch. O [README principal](../README.md#ensaios-funcionais-do-sistema-integrado) resume as observações de bancada da monografia.
 
 ## Modelo e reprodução
 

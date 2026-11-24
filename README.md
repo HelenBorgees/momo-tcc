@@ -1,38 +1,63 @@
 # Sistema inteligente para monitoramento de umidade em fraldas infantis por sensoriamento capacitivo e acesso remoto
 
-Trabalho de Conclusão de Curso de **Helen Borges de Lima Souza**, Engenharia de Controle e Automação, Universidade Federal de Ouro Preto (UFOP).
+**Helen Borges de Lima Souza**  
+Trabalho de Conclusão de Curso em Engenharia de Controle e Automação  
+Universidade Federal de Ouro Preto (UFOP) · Escola de Minas · 2026  
+**Orientadora** Profa. Dra. Adrielle C. Santana · **Coorientador** Prof. Me. João Carlos Vilela de Castro
 
-O MOMO é um **protótipo acadêmico em desenvolvimento**. O projeto investiga se a variação de capacitância medida em uma fralda pode indicar o início de um evento e distinguir urina, fezes e diarreia nos ensaios de bancada. O sistema proposto combina sensoriamento com o FDC1004, aquisição pelo XIAO ESP32-C6, classificação de séries temporais e acompanhamento em um aplicativo Android. A avaliação disponível é experimental e exploratória, sem validação clínica ou indicação de uso infantil.
+A verificação das condições de uma fralda depende, em grande parte, da observação direta do cuidador. A partir dessa necessidade, este trabalho desenvolveu um protótipo que acompanha variações de capacitância na fralda e disponibiliza informações em um aplicativo Android. Em bancada, foram utilizados materiais que simulam urina, fezes e diarreia para investigar a identificação dessas condições.
 
-## Estrutura
+## Funcionamento do sistema
 
-| Pasta | Conteúdo |
+O eletrodo capacitivo é posicionado externamente à fralda. A presença do material modifica a resposta capacitiva, medida pelo **FDC1004** e transmitida por I²C ao **XIAO ESP32-C6**. O microcontrolador processa o sinal e envia o estado do dispositivo e a identificação obtida ao **Firebase Realtime Database**. O aplicativo recebe essas informações e permite que o cuidador registre sua própria observação.
+
+<p align="center"><a href="docs/imagens/fluxo.png"><img src="docs/imagens/fluxo.png" width="740" alt="Diagrama da comunicação entre o FDC1004, o ESP32-C6, o Firebase e o aplicativo"></a><br><sub>Fluxo de comunicação entre os subsistemas.</sub></p>
+
+## Ensaios experimentais
+
+Na montagem em protoboard, os ensaios de **caracterização** observaram a resposta capacitiva na presença dos materiais, incluindo aplicações sucessivas na caracterização da urina. Os ensaios de **resposta temporal** partiram da fralda seca e acompanharam o sinal antes e depois de uma única aplicação. Foram realizadas três repetições temporais por material, com intervalo nominal de 250 ms e 120 s de acompanhamento após a aplicação.
+
+<p align="center"><a href="docs/imagens/graficos_temporais_ensaios.png"><img src="docs/imagens/graficos_temporais_ensaios.png" width="780" alt="Gráficos de capacitância ao longo do tempo para urina, fezes e diarreia simuladas"></a><br><sub>Respostas capacitivas dos materiais nos nove ensaios temporais.</sub></p>
+
+## Detecção e classificação
+
+A investigação começou com o **método dos mínimos quadrados (MMQ)**, que utilizou características calculadas após a aplicação. Em seguida, foi investigada uma estratégia para identificar o material mais cedo. A **Random Forest** detecta a primeira alteração no sinal após a calibração. A partir desse instante, o firmware reúne **21 leituras** e compara o trecho com assinaturas experimentais por **1-NN com Dynamic Time Warping (DTW)**.
+
+Na avaliação exploratória por exclusão de ensaios completos, o MMQ obteve 9 acertos nos 9 registros temporais. A estratégia Random Forest + 1-NN com DTW obteve 13 classificações corretas em 15 registros de aplicação única, com seleção do comprimento do prefixo no treino de cada rodada. Esses resultados dizem respeito aos conjuntos avaliados. No dispositivo, o modelo exportado emprega o prefixo fixo de 21 leituras.
+
+<p align="center"><a href="docs/imagens/fluxo_firmware_momo.png"><img src="docs/imagens/fluxo_firmware_momo.png" width="580" alt="Fluxograma de calibração, detecção pela Random Forest, coleta de 21 leituras e classificação por DTW"></a><br><sub>Sequência de detecção e classificação no firmware.</sub></p>
+
+## Construção do protótipo
+
+O circuito foi inicialmente montado em protoboard para permitir ajustes durante os ensaios. A partir dessa montagem, foi desenvolvida uma placa de circuito impresso dedicada para acomodar o conversor, o microcontrolador e as conexões do eletrodo. O invólucro impresso em 3D abriga a placa e a bateria e mantém acessíveis o interruptor e o conector USB-C.
+
+<p align="center"><a href="docs/imagens/eletrodo4.png"><img src="docs/imagens/eletrodo4.png" width="300" alt="Fotografia do eletrodo capacitivo com seus condutores"></a><br><sub>Eletrodo capacitivo desenvolvido para posicionamento externo à fralda.</sub></p>
+
+<p align="center"><a href="docs/imagens/momo_involucro_fotografias.png"><img src="docs/imagens/momo_involucro_fotografias.png" width="780" alt="Quatro fotografias do invólucro montado, mostrando o USB-C, o interruptor, a extremidade e a fixação do eletrodo"></a><br><sub>Vistas do protótipo montado.</sub></p>
+
+## Aplicativo e identidade visual
+
+O aplicativo foi desenvolvido para acompanhar o estado da fralda e orientar sua verificação. A configuração inicial usa a rede Wi-Fi temporária do dispositivo. Durante o monitoramento, o aplicativo recebe os dados pelo Firebase e distingue as detecções do sensor das trocas confirmadas pelo cuidador. O histórico de trocas pode ser consultado no aplicativo e exportado em PDF.
+
+<p align="center"><a href="docs/imagens/telas_aplicativo_conjunto.png"><img src="docs/imagens/telas_aplicativo_conjunto.png" width="650" alt="Telas de acesso, monitoramento, atividades, histórico, relatórios e gerenciamento do dispositivo"></a><br><sub>Principais telas do aplicativo Android.</sub></p>
+
+O nome **MOMO** vem da palavra japonesa para pêssego. A fruta foi associada à delicadeza da pele infantil e combinada com a figura de uma fralda. O símbolo e a paleta de cores orientaram a composição das telas.
+
+<p align="center"><a href="docs/imagens/MOMO_%20Branding.png"><img src="docs/imagens/MOMO_%20Branding.png" width="610" alt="Logotipo, símbolo do pêssego com fralda, paleta cromática e aplicações na interface"></a><br><sub>Identidade visual desenvolvida para o aplicativo.</sub></p>
+
+## Ensaios funcionais do sistema integrado
+
+A comunicação entre o dispositivo, o Firebase e o aplicativo foi implementada e observada nos testes funcionais. Em quatro aplicações documentadas, três materiais foram identificados corretamente e uma aplicação de diarreia foi classificada como urina. Em uma ocorrência separada, o dispositivo indicou fezes com a fralda seca. O aplicativo apresentou as indicações do dispositivo e permitiu consultar as confirmações de troca no histórico e em PDF.
+
+Durante os testes, o mau contato, as perdas de leitura e as oscilações com a movimentação dificultaram a aquisição contínua. Os registros disponíveis não permitem atribuir os erros a uma causa específica nem estimar a confiabilidade do sistema em uso. Os resultados são de bancada e o protótipo não foi validado para uso infantil.
+
+## Materiais para consulta
+
+| Etapa do trabalho | Arquivos |
 | --- | --- |
-| [aquisicao/](aquisicao/) | Sketches Arduino de caracterização e resposta temporal, registros CSV, gráficos SVG e anotações ambientais. |
-| [algoritmos/](algoritmos/) | Código Python da investigação por MMQ e da avaliação de Random Forest + 1-NN com DTW. |
-| [firmware/](firmware/) | Firmware XIAO ESP32-C6, inferência, modelo exportado e ferramentas de replay. |
-| [aplicativo/momo/](aplicativo/momo/) | Projeto Android nativo em Kotlin e Jetpack Compose, com configuração Gradle e testes. As regras Firebase estão em [aplicativo/firebase/](aplicativo/firebase/). |
-| [docs/](docs/) | Seleção de arquivos, verificações e publicação no GitHub. |
+| Aquisição experimental | [Programas de aquisição](aquisicao/sketches/) · [18 registros experimentais](aquisicao/dados/ensaios%285%29/) · [Procedimento de coleta](aquisicao/) |
+| Investigação dos classificadores | [MMQ em Python](algoritmos/mmq/) · [Random Forest + 1-NN com DTW em Python](algoritmos/rf_dtw/) · [Como reproduzir as análises](algoritmos/) |
+| Processamento embarcado | [Firmware e modelo exportado](firmware/momo_embarcado/) · [Montagem e configuração](firmware/) |
+| Acompanhamento remoto | [Projeto Android](aplicativo/momo/) · [Regras do Firebase Realtime Database](aplicativo/firebase/firebase_realtime_rules_prototipo.json) |
 
-## Aquisição experimental
-
-O FDC1004 mede a capacitância no canal 0. Os sketches configuram o conversor para 100 Hz e programam leituras seriais a cada 250 ms. A comunicação I²C usa SDA no GPIO 22 (D4) e SCL no GPIO 23 (D5) no XIAO ESP32-C6. Ambos registram tempo em milissegundos, capacitância em pF, CAPDAC, status e marcador. O sketch temporal aceita uma única marca de aplicação e encerra 120 s depois, com opção de parada manual. Consulte o procedimento e o significado dos campos. [Instruções de aquisição](aquisicao/README.md)
-
-Os 18 CSVs fornecidos incluem três ensaios temporais e três ensaios na série de umidade por material. Os gráficos e as anotações de temperatura e umidade ambiente foram preservados ao lado dos respectivos CSVs quando fornecidos. O ZIP de entrada original foi preservado para que os dois scripts possam abri-lo diretamente. Os registros mantêm os mesmos bytes do anexo.
-
-## Métodos avaliados
-
-- **MMQ.** Usa os nove ensaios temporais. Calcula a diferença entre capacitância média após a aplicação e a linha de base seca, a tendência linear e o intervalo interquartil após a aplicação. Padroniza as características com os dados de treino de cada rodada e ajusta por mínimos quadrados. A avaliação é leave-one-out por ensaio.
-- **Random Forest + 1-NN com DTW.** Usa 15 ensaios com um marcador de aplicação. A Random Forest binária usa desvio em relação à referência seca e diferenças de primeira e segunda ordem. O segmento começa na primeira previsão positiva após a calibração de 30 s. O 1-NN compara o prefixo desse segmento com segmentos de referência dos ensaios de treino pela distância DTW.
-- **Diferença em relação ao protocolo descrito.** O código recebido seleciona o comprimento do prefixo no treino interno de cada rodada, equilibrando acurácia balanceada e antecipação. A descrição do método final estabelece 21 leituras fixas. O script registra o comprimento escolhido em `k_train`. O modelo embarcado fornecido usa um prefixo fixo de 21 leituras e 15 assinaturas.
-
-Amostras do mesmo ensaio ficam juntas nas divisões de treino e teste. O MMQ usa a marca real de aplicação para calcular suas características e utiliza o trecho posterior completo. A avaliação de RF + DTW usa essa marca para gerar os rótulos de treino e verificar se o alerta saiu antes da aplicação. Veja os comandos de reprodução e os limites de interpretação. [Instruções das análises](algoritmos/README.md)
-
-## Firmware e aplicativo
-
-Os dois sketches fornecidos implementam aquisição experimental por serial. O firmware integrado lê o FDC1004, executa a inferência no XIAO ESP32-C6 e publica o estado no Firebase. O modelo fornecido contém 100 árvores e 15 assinaturas dos ensaios. [Configuração do firmware](firmware/README.md)
-
-O MOMO contém um modo de demonstração com dados simulados e um modo conectado. No modo conectado, usa Firebase Authentication com login Google e Firebase Realtime Database para telemetria, vínculos e histórico. O provisionamento inicial usa HTTP local pelo ponto de acesso temporário do dispositivo. A reprodução integrada exige configurar o firmware e um projeto Firebase próprio. [Instruções do aplicativo](aplicativo/momo/README.md)
-
-
-[Inventário e verificação](docs/inventario.md) · [Publicação no GitHub](docs/publicacao.md)
+Figuras de autoria própria, reproduzidas da monografia (2026).

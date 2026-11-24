@@ -2,7 +2,7 @@
 
 ## Sketches e conexão
 
-1. No Arduino IDE, instale o pacote de placas `esp32` da Espressif e a **ProtoCentral FDC1004 Capacitive Sensor Library**, que fornece `Protocentral_FDC1004.h`. O ambiente examinado tinha o core 3.3.12 e a biblioteca 2.0.1. As versões originais usadas para coletar os dados não foram informadas. `Wire.h` faz parte do core. [Biblioteca ProtoCentral](https://github.com/protocentral/ProtoCentral_fdc1004_breakout)
+1. No Arduino IDE, instale o pacote de placas `esp32` da Espressif e a **ProtoCentral FDC1004 Capacitive Sensor Library**, que fornece `Protocentral_FDC1004.h`. `Wire.h` faz parte do core. [Biblioteca ProtoCentral](https://github.com/protocentral/ProtoCentral_fdc1004_breakout)
 2. Selecione `XIAO_ESP32C6` e a porta do dispositivo. Ligue o FDC1004 pelo I²C com SDA em D4/GPIO 22 e SCL em D5/GPIO 23 e use o canal 0. Abra o arquivo `.ino` dentro da pasta de mesmo nome e carregue o sketch desejado.
 3. Abra a serial a 115200 baud. Envie `I` para iniciar, `A` para marcar a aplicação e `F` para terminar. O [sketch de caracterização](sketches/Ensaios_de_caracterizacao/Ensaios_de_caracterizacao.ino) admite múltiplas aplicações. O [sketch temporal](sketches/Ensaios_de_resposta_temporal/Ensaios_de_resposta_temporal.ino) registra uma aplicação e encerra automaticamente 120 s depois.
 4. Para um novo ensaio, capture em arquivo separado a saída da porta serial. Os sketches emitem mensagens de controle iniciadas por `#` junto com as linhas de leitura. Os cabeçalhos nos CSVs anexados estão em inglês. O material fornecido não inclui o procedimento intermediário de captura/exportação desses CSVs.

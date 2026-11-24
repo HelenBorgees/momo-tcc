@@ -20,4 +20,4 @@ Em Linux ou macOS, use `.venv/bin/python` nos três últimos comandos. O MMQ mos
 
 A variante de RF inicia a segmentação na primeira previsão positiva elegível. Para as características da RF ela usa somente linhas com `Marker == 0`; o script não filtra por `Status`. Os segmentos de referência são reconstruídos a partir das séries de treino dentro da validação, com detecção interna por exclusão de um ensaio. A DTW acumula diferenças quadráticas e normaliza o custo pelo comprimento do prefixo. A busca interna seleciona `k_train` para cada rodada externa. O [modelo embarcado exportado](../firmware/momo_embarcado/momo_modelo_treinado.json) usa 21 leituras fixas e 15 assinaturas. Esse artefato é distinto dos modelos ajustados a cada rodada da avaliação aninhada.
 
-Os scripts foram copiados byte a byte dos TXT recebidos com extensão `.py`. Nenhum ajuste científico foi feito. Rodadas completas podem gerar novos resultados e são opcionais para consultar o repositório.
+A análise por MMQ e a validação aninhada por RF + DTW correspondem às etapas de investigação descritas na monografia. O firmware utiliza o modelo exportado para execução no dispositivo.
