@@ -34,8 +34,5 @@ Os dois sketches fornecidos implementam aquisição experimental por serial. O f
 
 O MOMO contém um modo de demonstração com dados simulados e um modo conectado. No modo conectado, usa Firebase Authentication com login Google e Firebase Realtime Database para telemetria, vínculos e histórico. O provisionamento inicial usa HTTP local pelo ponto de acesso temporário do dispositivo. A reprodução integrada exige configurar o firmware e um projeto Firebase próprio. [Instruções do aplicativo](aplicativo/momo/README.md)
 
-## Limitações
-
-O conjunto contém poucas repetições por classe e as avaliações usam apenas os registros fornecidos. A base de RF + DTW mistura ensaios temporais e ensaios de umidade de fezes e diarreia, enquanto a classe urina entra apenas com a série temporal. Isso limita a interpretação da comparação entre classes e a generalização para outros protocolos ou condições de medição. O repositório permite identificar e reproduzir a variante fornecida, mas a operação integrada do protótipo ainda requer teste em placa e no aplicativo.
 
 [Inventário e verificação](docs/inventario.md) · [Publicação no GitHub](docs/publicacao.md)
